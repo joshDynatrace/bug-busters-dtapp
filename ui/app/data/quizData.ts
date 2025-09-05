@@ -22,28 +22,28 @@ export const quizQuestions: QuizQuestion[] = [
     hints: [
       "Try to clear the scores from the Top Scores. What do you notice?",
       "Try to use the Distributed Tracing App to understand which API calls are being made. Filter on the asteroids-game service. Press 'ctrl/cmd + K' in Dynatrace and type 'Distributed Tracing' to find the app",
-      "Use the Live Debugger to set a breakpoint in the part of the code that's responsible for clearing the scores. Press 'ctrl/cmd + K' in Dynatrace and type 'Live Debugger' to find the app. Click the purple pencil icon to set a Live Debugger filter. Use the bugzapper namespace as the filter. The source code repository should populate automatically."
+      "Use the Live Debugger to set a breakpoint in the part of the code in 'server.js' that's responsible for clearing the scores. Press 'ctrl/cmd + K' in Dynatrace and type 'Live Debugger' to find the app. Click the purple pencil icon to set a Live Debugger filter. Use the bugzapper namespace as the filter. The source code repository should populate automatically."
     ],
-    question: "What is the most likely cause of a memory leak in the user authentication system?",
+    question: "Why are the top scores not being cleared?",
     answers: [
       {
         id: "a",
-        text: "Using too many CSS animations",
+        text: "The wrong API is being called",
         isCorrect: false
       },
       {
         id: "b",
-        text: "Event listeners not being removed on component unmount",
+        text: "A new array is being created instead of clearing the existing array",
         isCorrect: true
       },
       {
         id: "c",
-        text: "Having too many API endpoints",
+        text: "The API being called doesn't exist",
         isCorrect: false
       },
       {
         id: "d",
-        text: "Using inline styles instead of CSS classes",
+        text: "The top scores are not being stored properly",
         isCorrect: false
       }
     ]
@@ -55,28 +55,28 @@ export const quizQuestions: QuizQuestion[] = [
     hints: [
       "Try to use the Distributed Tracing App to understand which API calls are being made. Filter on the asteroids-game service.",
       "Go to the Asteroids Game service in the Services app and check out the Logs. Notice there are some failures. Press 'ctrl/cmd + K' in Dynatrace and type 'Services' to find the app.",
-      "Based on the error logs, use the Live Debugger to set a breakpoint in the part of the code that is responsible for storing the game stats when a game ends."
+      "Based on the error logs, use the Live Debugger to set a breakpoint in the part of the code in 'server.js' that is responsible for storing the game stats when a game ends."
     ],
-    question: "Which scenario is most likely to cause an infinite loop in data processing?",
+    question: "Why is the accuracy game stat coming back as null?",
     answers: [
       {
         id: "a",
-        text: "Using forEach instead of map for array operations",
+        text: "The accuracy isn't being calculated on the server",
         isCorrect: false
       },
       {
         id: "b",
-        text: "A recursive function without a proper base case",
-        isCorrect: true
-      },
-      {
-        id: "c",
-        text: "Loading too much data at once",
+        text: "The front end is displaying the accurary data incorrectly",
         isCorrect: false
       },
       {
+        id: "c",
+        text: "The bullets fired variable being used in the calculation is the wrong one so an exception is thrown",
+        isCorrect: true
+      },
+      {
         id: "d",
-        text: "Using synchronous operations instead of async",
+        text: "The accurary variable is not being saved",
         isCorrect: false
       }
     ]
@@ -90,27 +90,27 @@ export const quizQuestions: QuizQuestion[] = [
       "Open the Live Debugger to set a breakpoint in the the function called when you clear Todos. Press 'ctrl/cmd + K' in Dynatrace and type 'Live Debugger' to find the app. Click the purple pencil icon to set a Live Debugger filter. Use the namespace todoapp as your Live Debugger filter.",
       "Why are the Todo tasks not getting cleared after looking at the code?"
     ],
-    question: "What's the best way to prevent race conditions when making multiple API calls?",
+    question: "Why are the Todo tasks not getting cleared?",
     answers: [
       {
         id: "a",
-        text: "Make all API calls synchronous",
+        text: "The Todo task are not actually being saved on the server",
         isCorrect: false
       },
       {
         id: "b",
-        text: "Use proper async/await with Promise.all() or sequential execution",
-        isCorrect: true
+        text: "A clear completed todo function was never implemented",
+        isCorrect: false
       },
       {
         id: "c",
-        text: "Add random delays between API calls",
+        text: "There is an exception being thrown when trying to clear the Todo tasks",
         isCorrect: false
       },
       {
         id: "d",
-        text: "Cache all API responses permanently",
-        isCorrect: false
+        text: "We are clearing Todo's from a newly instantiated variable on accident",
+        isCorrect: true
       }
     ]
   },
@@ -123,26 +123,26 @@ export const quizQuestions: QuizQuestion[] = [
       "Use the Live Debugger to set a breakpoint in the part of the code you found to analyze the data. Press 'ctrl/cmd + K' in Dynatrace and type 'Live Debugger' to find the app. Click the purple pencil icon to set a Live Debugger filter. Use the namespace todoapp as your Live Debugger filter.",
       "What's happening to the todotitle as it gets added to our list of todos?"
     ],
-    question: "What's the most effective way to optimize React component rendering performance?",
+    question: "Why are special characters being removed when saving the Todo task?",
     answers: [
       {
         id: "a",
-        text: "Use inline functions for all event handlers",
-        isCorrect: false
-      },
-      {
-        id: "b",
-        text: "Implement React.memo() and useMemo() strategically",
+        text: "There is a replaceAll string function that's stripping them out",
         isCorrect: true
       },
       {
+        id: "b",
+        text: "The todo item is being concatenated and shortened in the server logic",
+        isCorrect: false
+      },
+      {
         id: "c",
-        text: "Avoid using useState hook",
+        text: "The special characters are actually not being removed",
         isCorrect: false
       },
       {
         id: "d",
-        text: "Render all components at the same time",
+        text: "The correct Todo title is not being sent to the addTodo function on the server",
         isCorrect: false
       }
     ]
