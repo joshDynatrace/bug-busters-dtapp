@@ -1,22 +1,30 @@
 import { Page } from "@dynatrace/strato-components-preview/layouts";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Data } from "./pages/Data";
 import { Header } from "./components/Header";
-import { Home } from "./pages/Home";
+import { IntroPage } from "./pages/IntroPage";
+import { QuizPage } from "./pages/QuizPage";
+import { ResultsPage } from "./pages/ResultsPage";
+import { TimerProvider } from "./contexts/TimerContext";
+import { QuizProvider } from "./contexts/QuizContext";
 
 export const App = () => {
   return (
-    <Page>
-      <Page.Header>
-        <Header />
-      </Page.Header>
-      <Page.Main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/data" element={<Data />} />
-        </Routes>
-      </Page.Main>
-    </Page>
+    <TimerProvider>
+      <QuizProvider>
+        <Page>
+          <Page.Header>
+            <Header />
+          </Page.Header>
+          <Page.Main>
+            <Routes>
+              <Route path="/" element={<IntroPage />} />
+              <Route path="/quiz/:questionId" element={<QuizPage />} />
+              <Route path="/results" element={<ResultsPage />} />
+            </Routes>
+          </Page.Main>
+        </Page>
+      </QuizProvider>
+    </TimerProvider>
   );
 };

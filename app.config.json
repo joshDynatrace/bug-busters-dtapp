@@ -3,8 +3,11 @@
   "app": {
     "name": "Bug Busters",
     "version": "0.0.0",
-    "description": "A starting project with routing, fetching data, and charting",
+    "description": "A quiz app where users find bugs and answer multiple choice questions to test their debugging skills",
     "id": "my.bug.busters",
-    "scopes": [{ "name": "storage:logs:read", "comment": "default template" }, { "name": "storage:buckets:read", "comment": "default template" }]
+    "scopes": [
+      { "name": "state:user-app-states:write", "comment": "Store quiz results" },
+      { "name": "state:user-app-states:read", "comment": "Read quiz results" }
+    ]
   }
 }
