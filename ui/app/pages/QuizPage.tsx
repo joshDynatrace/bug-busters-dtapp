@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flex } from '@dynatrace/strato-components/layouts';
 import { Heading, Paragraph } from '@dynatrace/strato-components/typography';
 import { Button } from '@dynatrace/strato-components/buttons';
@@ -14,6 +14,11 @@ export const QuizPage: React.FC = () => {
 
   const currentQuestionIndex = parseInt(questionId || '1') - 1;
   const question = quizQuestions[currentQuestionIndex];
+
+  // Reset selected answer when question changes
+  useEffect(() => {
+    setSelectedAnswer('');
+  }, [questionId]);
 
   if (!question) {
     navigate('/');
