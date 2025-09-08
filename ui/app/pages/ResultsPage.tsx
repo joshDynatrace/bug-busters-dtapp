@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSetUserAppState } from '@dynatrace-sdk/react-hooks';
 import { useQuiz } from '../contexts/QuizContext';
 import { useTimer } from '../contexts/TimerContext';
-import { quizQuestions } from '../data/quizData';
+import { quizQuestions, QUIZ_TIMER_INITIAL } from '../data/quizData';
 
 export const ResultsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -18,6 +18,12 @@ export const ResultsPage: React.FC = () => {
   const finalScore = calculateScore(timeRemaining);
   const correctAnswers = userAnswers.filter(answer => answer.isCorrect).length;
   const incorrectAnswers = userAnswers.filter(answer => !answer.isCorrect).length;
+  
+  // Calculate the same multiplier logic for display
+  const timePercentage = timeRemaining / QUIZ_TIMER_INITIAL;
+  const timeMultiplier = 1 + timePercentage;
+  const baseCorrectPoints = correctAnswers * 100;
+  const multipliedCorrectPoints = Math.round(baseCorrectPoints * timeMultiplier);
 
   useEffect(() => {
     stopTimer();
@@ -119,16 +125,19 @@ export const ResultsPage: React.FC = () => {
             ✅ Correct Answers: {correctAnswers} out of {quizQuestions.length}
           </Paragraph>
           <Paragraph style={{ color: '#155724', fontSize: '16px', margin: 0 }}>
-            🎯 Correct Answer Bonus: +{correctAnswers * 100} points
+            🎯 Base Score: {baseCorrectPoints} points ({correctAnswers} × 100)
+          </Paragraph>
+          <Paragraph style={{ color: '#0366d6', fontSize: '16px', margin: 0 }}>
+            ⏱️ Time Multiplier: {timeMultiplier.toFixed(2)}x ({Math.round(timePercentage * 100)}% time remaining)
+          </Paragraph>
+          <Paragraph style={{ color: '#155724', fontSize: '16px', margin: 0 }}>
+            🚀 Time-Boosted Score: {multipliedCorrectPoints} points
           </Paragraph>
           {incorrectAnswers > 0 && (
             <Paragraph style={{ color: '#dc3545', fontSize: '16px', margin: 0 }}>
               ❌ Wrong Answer Penalty: -{incorrectAnswers * 100} points
             </Paragraph>
           )}
-          <Paragraph style={{ color: '#155724', fontSize: '16px', margin: 0 }}>
-            ⏱️ Time Bonus: +{timeRemaining} points
-          </Paragraph>
         </Flex>
       </Flex>
 

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { QuizQuestion, POINTS_PER_CORRECT_ANSWER } from '../data/quizData';
+import { QuizQuestion, POINTS_PER_CORRECT_ANSWER, QUIZ_TIMER_INITIAL } from '../data/quizData';
 
 interface UserAnswer {
   questionId: number;
@@ -75,9 +75,17 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
   const calculateScore = (timeRemaining: number) => {
     const correctAnswers = userAnswers.filter((answer) => answer.isCorrect).length;
     const incorrectAnswers = userAnswers.filter((answer) => !answer.isCorrect).length;
-    const bonusPoints = correctAnswers * POINTS_PER_CORRECT_ANSWER;
-    const penaltyPoints = incorrectAnswers * POINTS_PER_CORRECT_ANSWER; // Same value but subtracted
-    return timeRemaining + bonusPoints - penaltyPoints;
+    
+    // Calculate time multiplier (percentage of time remaining + 1)
+    // This means 100% time remaining = 2x multiplier, 50% = 1.5x, 0% = 1x
+    const timePercentage = timeRemaining / QUIZ_TIMER_INITIAL;
+    const timeMultiplier = 1 + timePercentage;
+    
+    const baseCorrectPoints = correctAnswers * POINTS_PER_CORRECT_ANSWER;
+    const multipliedCorrectPoints = Math.round(baseCorrectPoints * timeMultiplier);
+    const penaltyPoints = incorrectAnswers * POINTS_PER_CORRECT_ANSWER;
+    
+    return Math.max(0, multipliedCorrectPoints - penaltyPoints); // Ensure score doesn't go negative
   };
 
   const resetQuiz = () => {
