@@ -85,7 +85,7 @@ export const IntroPage: React.FC = () => {
           fontStyle: 'italic'
         }}>
           ⏱️ You have a maximum of 30 minutes to answer 4 questions. Each correct answer earns you 
-          100 points. The faster you finish the higher your score will be   .
+          100 points. The faster you finish the higher your score will be.
         </Paragraph>
       </Flex>
 

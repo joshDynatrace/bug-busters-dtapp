@@ -17,6 +17,7 @@ export const ResultsPage: React.FC = () => {
 
   const finalScore = calculateScore(timeRemaining);
   const correctAnswers = userAnswers.filter(answer => answer.isCorrect).length;
+  const incorrectAnswers = userAnswers.filter(answer => !answer.isCorrect).length;
 
   useEffect(() => {
     stopTimer();
@@ -31,6 +32,7 @@ export const ResultsPage: React.FC = () => {
         email: userEmail,
         score: finalScore,
         correctAnswers,
+        incorrectAnswers,
         totalQuestions: quizQuestions.length,
         timeRemaining,
         completedAt: new Date().toISOString(),
@@ -117,10 +119,15 @@ export const ResultsPage: React.FC = () => {
             ✅ Correct Answers: {correctAnswers} out of {quizQuestions.length}
           </Paragraph>
           <Paragraph style={{ color: '#155724', fontSize: '16px', margin: 0 }}>
-            🎯 Correct Answer Bonus: {correctAnswers * 100}
+            🎯 Correct Answer Bonus: +{correctAnswers * 100} points
           </Paragraph>
+          {incorrectAnswers > 0 && (
+            <Paragraph style={{ color: '#dc3545', fontSize: '16px', margin: 0 }}>
+              ❌ Wrong Answer Penalty: -{incorrectAnswers * 100} points
+            </Paragraph>
+          )}
           <Paragraph style={{ color: '#155724', fontSize: '16px', margin: 0 }}>
-            ⏱️ Time Bonus: {timeRemaining} points
+            ⏱️ Time Bonus: +{timeRemaining} points
           </Paragraph>
         </Flex>
       </Flex>

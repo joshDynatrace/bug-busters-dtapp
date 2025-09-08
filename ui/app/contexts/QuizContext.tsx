@@ -74,8 +74,10 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
 
   const calculateScore = (timeRemaining: number) => {
     const correctAnswers = userAnswers.filter((answer) => answer.isCorrect).length;
+    const incorrectAnswers = userAnswers.filter((answer) => !answer.isCorrect).length;
     const bonusPoints = correctAnswers * POINTS_PER_CORRECT_ANSWER;
-    return timeRemaining + bonusPoints;
+    const penaltyPoints = incorrectAnswers * POINTS_PER_CORRECT_ANSWER; // Same value but subtracted
+    return timeRemaining + bonusPoints - penaltyPoints;
   };
 
   const resetQuiz = () => {
