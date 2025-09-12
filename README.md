@@ -33,9 +33,10 @@ Bug Busters is a quiz application where users analyze common software bugs and a
 ## Getting Started
 
 1. Clone and navigate to the project directory
-2. Install dependencies: `npm install`
-3. Start development server: `npx dt-app dev`
-4. Open in Dynatrace environment or locally at the provided URL
+2. Update environmentUrl in app.config.json to point to the tenant you want to use
+3. Install dependencies: `npm install`
+4. Start development server: `npx dt-app dev`
+5. Open in Dynatrace environment or locally at the provided URL
 
 ## Configuration
 
