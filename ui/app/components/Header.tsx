@@ -9,6 +9,9 @@ export const Header = () => {
       <AppHeader>
         <AppHeader.NavItems>
           <AppHeader.AppNavLink as={Link} to="/" />
+          <AppHeader.NavItem as={Link} to="/scoreboard">
+            Scoreboard
+          </AppHeader.NavItem>
         </AppHeader.NavItems>
       </AppHeader>
       <TimerBar />
